@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from pedido import calcular_total
-from models import db, Pedido  # Importamos la base de datos y el modelo
+from models import db, Pedido  # aqui se importa la base de datos y el modelo ojo al piojo
 
 # Configuración de la aplicación y la ruta de las plantillas
 base_dir = os.path.abspath(os.path.dirname(__file__))
