@@ -15,7 +15,6 @@ def test_calcular_total_con_delivery_y_descuento():
     assert total == 17.15
 
 def test_carrito_vacio_no_cobra_delivery():
-    # Carrito sin productos, pero con la opción de delivery activada (o asumiendo costo base)
     productos = []
     tiene_cupon = False
     
