@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Panel de Control 👨‍🍳</h2>
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow-sm border-primary mb-4">
+            <div class="card-header bg-primary text-white fw-bold">
+                Pedidos Pendientes
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for pedido in pedidos %}
+                <li class="list-group-item d-flex justify-content-between align-items-center animate-fade-in">
+                    <div>
+                        <div class="d-flex align-items-center">
+                        <strong class="text-primary fs-5 me-2">{{ pedido.ticket }}</strong>
+                        <span id="badge-{{ pedido.id }}">
+                            {% if pedido.entregado %}
+                                <span class="badge bg-success bg-gradient">Entregado</span>
+                            {% else %}
+                                <span class="badge bg-warning bg-gradient text-dark">Pendiente</span>
+                            {% endif %}
+                        </span>
+                    </div>
+                    <small class="text-dark d-block mt-1 fw-semibold">{{ pedido.detalle_productos }}</small>
+                    <small class="text-muted" style="font-size: 11px;">🕒 Ordenado el: {{ pedido.fecha.strftime('%d/%m/%Y %H:%M') }}</small>
+                </div>
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-dark rounded-pill fs-6 px-3">S/ {{ "%.2f"|format(pedido.total) }}</span>
+                    
+                    {% if not pedido.entregado %}
+                        <button id="btn-{{ pedido.id }}" onclick="marcarEntregado({{ pedido.id }})" class="btn btn-sm btn-success ms-3 fw-bold shadow-sm">
+                            ✓ Marcar Entregado
+                        </button>
+                    {% endif %}
+                    </div>
+                </li>
+                {% else %}
+                <li class="list-group-item text-center py-5 text-muted">
+                    <div class="fs-1 mb-2">☕</div>
+                    <p class="mb-0 fw-bold">No hay pedidos pendientes por el momento.</p>
+                    <small>La cafetería del Sr. Julio está al día.</small>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white fw-bold">
+                Control de Menú
+            </div>
+            <div class="card-body">
+                <button class="btn btn-outline-danger w-100">Apagar Sándwich de Atún</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function marcarEntregado(pedidoId) {
+    // 1. Efecto visual inmediato: deshabilitamos el botón para que no hagan doble clic
+    const btn = document.getElementById(`btn-${pedidoId}`);
+    btn.disabled = true;
+    btn.innerHTML = "⏳ Actualizando...";
+
+    // 2. Enviamos la orden silenciosa al servidor (app.py)
+    fetch(`/entregar/${pedidoId}`, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // 3. El servidor dijo OK. Cambiamos la etiqueta de Pendiente a Entregado al instante
+            const badgeContainer = document.getElementById(`badge-${pedidoId}`);
+            badgeContainer.innerHTML = '<span class="badge bg-success bg-gradient">Entregado</span>';
+
+            // 4. Desaparecemos el botón verde con una animación suave
+            btn.style.transition = "opacity 0.3s";
+            btn.style.opacity = "0";
+            setTimeout(() => btn.remove(), 300); // Lo borramos del HTML tras la animación
+        }
+    })
+    .catch(error => {
+        // Por si se cae el internet o falla el servidor
+        console.error('Error:', error);
+        btn.disabled = false;
+        btn.innerHTML = "✓ Marcar Entregado";
+        alert("Ups, hubo un error de conexión con la base de datos.");
+    });
+}
+</script>
+{% endblock %}

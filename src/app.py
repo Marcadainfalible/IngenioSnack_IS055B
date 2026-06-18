@@ -1,11 +1,26 @@
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from pedido import calcular_total
+from models import db, Pedido  # Importamos la base de datos y el modelo
 
+# Configuración de la aplicación y la ruta de las plantillas
+base_dir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__, template_folder='../templates')
+
+# Configuración de la base de datos SQLite
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir, 'ingeniosnack.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Inicializamos la base de datos con la aplicación
+db.init_app(app)
+
+# Crear las tablas automáticamente si no existen
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('cliente/index.html')
 
 @app.route('/calcular', methods=['POST'])
 def calcular():
@@ -15,31 +30,40 @@ def calcular():
     
     # Formatear los productos para nuestra función calcular_total
     productos = []
+    nombres_para_ticket = []  # Extraemos los nombres para guardarlos en la BD
+    
     for item in items_seleccionados:
         nombre, precio = item.split(',')
         productos.append({"nombre": nombre, "precio": float(precio)})
+        nombres_para_ticket.append(nombre)
         
-    # Usar la función XP refactorizada
+    # 1. Usar la función XP refactorizada (Lógica de Negocio)
     total = calcular_total(productos, tiene_cupon)
     
-    return render_template('exito.html', total=total)
+    # 2. Guardar en la Base de Datos usando SQLAlchemy (Persistencia)
+    detalle_texto = " + ".join(nombres_para_ticket)
+    nuevo_pedido = Pedido(detalle_productos=detalle_texto, total=total)
+    
+    db.session.add(nuevo_pedido)
+    db.session.commit()  # Aquí se guarda físicamente en ingeniosnack.db
+    
+    # Pasamos el número de ticket generado automáticamente a la vista de éxito
+    return render_template('cliente/exito.html', total=total, ticket=nuevo_pedido.ticket)
 
 @app.route('/admin')
-def admin():
-    return """
-    <div style='font-family: Arial; text-align: center; padding: 50px; background: #e0f7fa;'>
-        <h1 style='color: #333;'>IngenioSnack - Panel de Control 👨‍🍳</h1>
-        <div style='background: white; padding: 20px; border-radius: 10px; display: inline-block;'>
-            <h3>Pedidos Pendientes: 1 (Simulado)</h3>
-            <p>1x Sándwich de Pollo, 1x Café - <b>Total: S/ 15.00</b></p>
-            <button style='background: #4CAF50; color: white; padding: 5px 10px; border: none;'>Marcar Entregado</button>
-            <hr>
-            <h3>Control de Menú</h3>
-            <button style='background: #f44336; color: white; padding: 5px 10px; border: none;'>Apagar Sándwich de Atún (Agotado)</button>
-        </div>
-        <br><br><a href='/'>Volver a la tienda</a>
-    </div>
-    """
+def admin():   
+    # Consultar todos los pedidos de la base de datos (ordenados del más nuevo al más viejo)
+    pedidos_reales = Pedido.query.order_by(Pedido.fecha.desc()).all()
+    # Enviamos los datos reales a la plantilla del Sr. Julio
+    return render_template('admin/panel.html', pedidos=pedidos_reales)
+@app.route('/entregar/<int:id>', methods=['POST'])
+def entregar_pedido(id):
+    pedido = Pedido.query.get_or_404(id)
+    pedido.entregado = True
+    db.session.commit()
+
+    # En lugar de recargar la página, enviamos una respuesta silenciosa al navegador
+    return jsonify({"success": True})
 
 if __name__ == '__main__':
     app.run(debug=True)
