@@ -1,0 +1,71 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-dark m-0">Inteligencia de Negocios 📊</h2>
+    <span class="badge bg-danger bg-gradient fs-6 shadow-sm">Filtro Activo: Semana de Parciales 📚</span>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white fw-bold py-3 text-secondary">
+                Top 5: Productos Más Vendidos
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <canvas id="graficoVentas" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 bg-primary bg-gradient text-white h-100 position-relative overflow-hidden">
+            <div class="card-body p-4 d-flex flex-column justify-content-center">
+                <h5 class="card-title fw-bold mb-4 opacity-75">El Rey de los Parciales 👑</h5>
+                <h2 class="display-5 fw-bold mb-0">☕ Café</h2>
+                <p class="fs-5 mt-2 opacity-75">185 unidades vendidas</p>
+                <button class="btn btn-light text-primary fw-bold mt-auto w-100 shadow-sm">Exportar Reporte (.CSV)</button>
+            </div>
+            <div class="position-absolute end-0 bottom-0 opacity-25" style="font-size: 8rem; transform: translate(20px, 30px);">📈</div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Recibimos los datos directamente desde Python usando Jinja2 a JSON
+    const etiquetas = {{ ventas.labels | tojson }};
+    const datos = {{ ventas.valores | tojson }};
+
+    const ctx = document.getElementById('graficoVentas').getContext('2d');
+    
+    new Chart(ctx, {
+        type: 'bar', // Gráfico de barras
+        data: {
+            labels: etiquetas,
+            datasets: [{
+                label: 'Unidades Vendidas',
+                data: datos,
+                backgroundColor: [
+                    'rgba(13, 110, 253, 0.8)', // Azul Bootstrap
+                    'rgba(255, 193, 7, 0.8)',  // Amarillo
+                    'rgba(25, 135, 84, 0.8)',  // Verde
+                    'rgba(220, 53, 69, 0.8)',  // Rojo
+                    'rgba(111, 66, 193, 0.8)'  // Morado
+                ],
+                borderRadius: 6 // Bordes redondeados modernos
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false } // Ocultamos la leyenda para que se vea más limpio
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+{% endblock %}

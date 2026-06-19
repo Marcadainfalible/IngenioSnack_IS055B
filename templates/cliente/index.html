@@ -11,124 +11,61 @@
 </div>
 
 <div class="row g-4">
-    <div class="col-lg-8">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="fw-bold m-0 text-dark">El Menú de Hoy 🧑‍🍳</h4>
-            <span class="badge bg-secondary">3 Productos Disponibles</span>
-        </div>
-        
-        <form action="/calcular" method="POST">
-            <div class="row row-cols-1 row-cols-md-2 g-3">
-                
-                <div class="col">
-                    <div class="card h-100 border-0 shadow-sm custom-card">
-                        <div class="bg-light p-4 text-center rounded-top position-relative" style="font-size: 3.5rem;">
-                            🥪
-                            <span class="position-absolute top-0 end-0 m-2 badge bg-danger fw-bold">¡Más Vendido!</span>
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <div>
-                                <h5 class="card-title fw-bold text-dark">Sándwich de Pollo Especial</h5>
-                                <p class="card-text text-muted small">Pollo deshilachado con mayonesa de la casa, apio crujiente y lechuga orgánica en pan artesanal.</p>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="fs-5 fw-bold text-success">S/ 10.00</span>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input custom-switch" type="checkbox" name="producto" value="Sándwich de Pollo,10.0" id="pollo">
-                                    <label class="form-check-label small text-muted" for="pollo">Agregar</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    {% include 'cliente/componentes/menu.html' %}
 
-                <div class="col">
-                    <div class="card h-100 border-0 shadow-sm custom-card">
-                        <div class="bg-light p-4 text-center rounded-top" style="font-size: 3.5rem;">
-                            🥪✨
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <div>
-                                <h5 class="card-title fw-bold text-dark">Sándwich Mixto Clásico</h5>
-                                <p class="card-text text-muted small">Jamón inglés seleccionado y queso edam derretido al compás de la plancha caliente. Un clásico infalible.</p>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="fs-5 fw-bold text-success">S/ 8.00</span>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input custom-switch" type="checkbox" name="producto" value="Sándwich Mixto,8.0" id="mixto">
-                                    <label class="form-check-label small text-muted" for="mixto">Agregar</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card h-100 border-0 shadow-sm custom-card">
-                        <div class="bg-light p-4 text-center rounded-top" style="font-size: 3.5rem;">
-                            ☕
-                        </div>
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <div>
-                                <h5 class="card-title fw-bold text-dark">Café Americano Destilado</h5>
-                                <p class="card-text text-muted small">Granos seleccionados para darte la energía necesaria y sobrevivir a las clases de arquitectura y desarrollo de software.</p>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="fs-5 fw-bold text-success">S/ 3.50</span>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input custom-switch" type="checkbox" name="producto" value="Café Americano,3.5" id="cafe">
-                                    <label class="form-check-label small text-muted" for="cafe">Agregar</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-    </div>
-
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm sticky-top" style="top: 20px; z-index: 1;">
-            <div class="card-header bg-dark text-white p-3 fw-bold d-flex justify-content-between align-items-center">
-                <span>Tu Pedido Actual</span>
-                <span>🛒</span>
-            </div>
-            <div class="card-body p-4">
-                <div class="mb-3 text-muted small">
-                    <p class="mb-1">📍 <b>Punto de Entrega:</b> Cafetería o Delivery FIS</p>
-                    <p class="mb-0">💵 <b>Método de Pago:</b> Contra Entrega (Efectivo/Yape)</p>
-                </div>
-                
-                <hr class="text-muted">
-                
-                <div class="p-3 bg-light rounded mb-4 border border-warning-subtle">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="cupon" value="true" id="cupon">
-                        <label class="form-check-label fw-bold text-warning-dark" for="cupon">
-                            🎁 Aplicar Tarjeta de Fidelidad
-                        </label>
-                    </div>
-                    <small class="text-muted d-block mt-1 ps-4">¿Tienes 10 sellos? Obtén tu descuento de lealtad en esta orden.</small>
-                </div>
-
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-warning btn-lg text-white fw-bold shadow-sm">
-                        Procesar Orden ⚡
-                    </button>
-                    <small class="text-center text-muted mt-2">La lógica matemática se calculará mediante el backend robusto (TDD).</small>
-                </div>
-            </div>
-        </div>
-        </form>
-    </div>
+    {% include 'cliente/componentes/carrito.html' %}
 </div>
 
 <style>
     .custom-card { transition: transform 0.2s ease, box-shadow 0.2s ease; border-radius: 12px; }
     .custom-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important; }
-    .custom-switch { width: 3em !important; height: 1.5em !important; cursor: pointer; }
-    .custom-switch:checked { background-color: #ff9800 !important; border-color: #ff9800 !important; }
     .text-warning-dark { color: #d68102; }
     .text-secondary-dark { color: #4f4f4f; }
+    
+    .producto-agotado { filter: grayscale(100%); opacity: 0.65; pointer-events: none; }
+    .ribbon-agotado { position: absolute; top: 18px; left: -32px; background-color: #dc3545; color: white; text-align: center; font-weight: bold; font-size: 0.75rem; padding: 4px 35px; transform: rotate(-45deg); transform-origin: right bottom; width: 130px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); z-index: 5; letter-spacing: 1px; }
+
+    .progress { border-radius: 10px; box-shadow: inset 0 1px 2px rgba(0,0,0,.1); }
+    .recompensa-icono { font-size: 1.5rem; filter: grayscale(100%); opacity: 0.5; transition: all 0.3s ease; }
 </style>
+
+<script>
+    let productoActual = null; let cantidadActual = 1; let carrito = []; 
+
+    function verDetalle(nombre, precio, icono) {
+        productoActual = { nombre: nombre, precio: precio, icono: icono }; cantidadActual = 1; 
+        document.getElementById('vp-icono').innerText = icono; document.getElementById('vp-nombre').innerText = nombre;
+        document.getElementById('vp-precio').innerText = "S/ " + precio.toFixed(2); document.getElementById('vp-cantidad').innerText = cantidadActual;
+        document.getElementById('vista-previa').classList.remove('d-none');
+    }
+
+    function cambiarCantidad(cambio) {
+        let nueva = cantidadActual + cambio;
+        if (nueva >= 1) { cantidadActual = nueva; document.getElementById('vp-cantidad').innerText = cantidadActual; }
+    }
+
+    function agregarAlCarrito() {
+        if (!productoActual) return;
+        carrito.push({ nombre: productoActual.nombre, precio: productoActual.precio, cantidad: cantidadActual });
+        document.getElementById('vista-previa').classList.add('d-none'); productoActual = null; actualizarUI();
+    }
+
+    function actualizarUI() {
+        const lista = document.getElementById('lista-carrito'); const inputs = document.getElementById('inputs-ocultos'); let total = 0;
+        lista.innerHTML = ''; inputs.innerHTML = ''; 
+
+        if (carrito.length === 0) {
+            lista.innerHTML = '<li class="list-group-item text-center text-muted small px-0">Tu carrito está vacío. Selecciona un producto del menú.</li>';
+            document.getElementById('btn-procesar').disabled = true; document.getElementById('carrito-total').innerText = "S/ 0.00"; return;
+        }
+
+        document.getElementById('btn-procesar').disabled = false;
+        carrito.forEach(item => {
+            total += item.precio * item.cantidad;
+            lista.innerHTML += `<li class="list-group-item d-flex justify-content-between align-items-center px-0 bg-transparent border-0 pb-1"><div><span class="badge bg-primary rounded-pill me-2">${item.cantidad}</span> <span class="fw-semibold text-dark">${item.nombre}</span></div><span class="text-success fw-bold">S/ ${(item.precio * item.cantidad).toFixed(2)}</span></li>`;
+            for (let i = 0; i < item.cantidad; i++) { inputs.innerHTML += `<input type="hidden" name="producto" value="${item.nombre},${item.precio}">`; }
+        });
+        document.getElementById('carrito-total').innerText = "S/ " + total.toFixed(2);
+    }
+</script>
 {% endblock %}

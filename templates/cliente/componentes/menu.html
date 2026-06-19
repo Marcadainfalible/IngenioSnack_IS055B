@@ -1,0 +1,49 @@
+<div class="col-lg-8">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="fw-bold m-0 text-dark">El Menú de Hoy 🧑‍🍳</h4>
+        <span class="badge bg-secondary">Productos Disponibles</span>
+    </div>
+
+    {% for categoria, lista_productos in productos|groupby('categoria') %}
+    
+    <h4 class="text-primary mt-5 mb-3 border-bottom pb-2 fw-bold">{{ categoria }}</h4>
+    
+    <div class="row row-cols-1 row-cols-md-2 g-3 mb-4">
+        {% for p in lista_productos %}
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm custom-card position-relative overflow-hidden {% if not p.disponible %}producto-agotado{% endif %}">
+                
+                {% if not p.disponible %}
+                <div class="ribbon-agotado">AGOTADO</div>
+                {% endif %}
+
+                <div class="bg-light p-4 text-center rounded-top" style="font-size: 3.5rem;">
+                    {% if p.categoria == 'Sándwiches' %}🥪
+                    {% elif p.categoria == 'Bebidas' %}🥤
+                    {% else %}🍿{% endif %}
+                </div>
+                
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title fw-bold text-dark">{{ p.nombre }}</h5>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="fs-5 fw-bold text-success">S/ {{ "%.2f"|format(p.precio) }}</span>
+                        
+                        <button type="button" 
+                                class="btn btn-sm {% if p.disponible %}btn-outline-primary{% else %}btn-secondary disabled{% endif %} fw-bold px-3" 
+                                {% if p.disponible %}
+                                onclick="verDetalle('{{ p.nombre }}', {{ p.precio }}, '{% if p.categoria == 'Sándwiches' %}🥪{% elif p.categoria == 'Bebidas' %}🥤{% else %}🍿{% endif %}')"
+                                {% else %}
+                                disabled
+                                {% endif %}>
+                            {% if p.disponible %}Seleccionar{% else %}Sin Stock{% endif %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div> 
+    {% endfor %}
+</div>

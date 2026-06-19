@@ -1,0 +1,93 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-dark m-0">Gestión de Inventario y Menú</h2>
+    <span class="badge bg-dark fs-6 shadow-sm">Control en Vivo ⚡</span>
+</div>
+
+<p class="text-muted">Apaga un producto cuando se agote en la cafetería. Se actualizará instantáneamente en la pantalla de los estudiantes.</p>
+
+{% for categoria, lista_productos in productos|groupby('categoria') %}
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-light text-primary fw-bold py-3 fs-5">
+        {{ categoria }}
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="text-start ps-4">Nombre del Producto</th>
+                        <th scope="col">Precio Base</th>
+                        <th scope="col" class="pe-4">Estado en Menú</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in lista_productos %}
+                    <tr>
+                        <td class="text-start ps-4 fw-semibold text-dark">{{ p.nombre }}</td>
+                        <td class="text-success fw-bold">S/ {{ "%.2f"|format(p.precio) }}</td>
+                        <td class="pe-4">
+                            <div class="form-check form-switch d-flex justify-content-center">
+                                <input class="form-check-input custom-switch-admin" 
+                                       type="checkbox" 
+                                       role="switch" 
+                                       id="switch-{{ p.id }}"
+                                       {% if p.disponible %} checked {% endif %}
+                                       onclick="cambiarEstadoProducto({{ p.id }})">
+                                <label class="form-check-label small ms-2 text-muted" id="label-{{ p.id }}" for="switch-{{ p.id }}">
+                                    {% if p.disponible %}Disponible{% else %}Agotado{% endif %}
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<style>
+    .custom-switch-admin { width: 2.8em !important; height: 1.4em !important; cursor: pointer; }
+    .custom-switch-admin:checked { background-color: #198754 !important; border-color: #198754 !important; }
+</style>
+
+<script>
+function cambiarEstadoProducto(productoId) {
+    const label = document.getElementById('label-' + productoId);
+    const checkbox = document.getElementById('switch-' + productoId);
+    
+    // Deshabilitamos momentáneamente para evitar doble clic erróneo
+    checkbox.disabled = true;
+
+    fetch('/admin/toggle_producto/' + productoId, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === 'success') {
+            // Actualizamos el texto visual de forma dinámica
+            if(data.nuevo_estado) {
+                label.innerText = "Disponible";
+                label.className = "form-check-label small ms-2 text-success fw-semibold";
+            } else {
+                label.innerText = "Agotado";
+                label.className = "form-check-label small ms-2 text-danger fw-semibold";
+            }
+        } else {
+            alert("Hubo un error al actualizar la base de datos.");
+            checkbox.checked = !checkbox.checked; // Revertimos visualmente si falla
+        }
+        checkbox.disabled = false;
+    })
+    .catch(error => {
+        alert("Error de conexión.");
+        checkbox.checked = !checkbox.checked;
+        checkbox.disabled = false;
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-dark m-0">Salón de la Fama 🏆</h2>
+    <span class="badge bg-warning text-dark fs-6 shadow-sm">Top 5 Clientes Frecuentes</span>
+</div>
+
+<p class="text-muted">Estudiantes con mayor volumen de compras. Ideal para aplicar recompensas o el café gratis de la tarjeta de fidelidad.</p>
+
+<div class="card shadow-sm border-0 mt-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" class="text-center ps-3" style="width: 80px;">Top</th>
+                        <th scope="col">Estudiante</th>
+                        <th scope="col">Carrera</th>
+                        <th scope="col" class="text-center">Compras Totales</th>
+                        <th scope="col" class="text-center pe-4">Puntos de Fidelidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr class="{% if cliente.posicion == 1 %}table-warning{% elif cliente.posicion == 2 %}table-secondary{% elif cliente.posicion == 3 %}table-danger{% endif %}">
+                        
+                        <th scope="row" class="text-center ps-3 fs-4">
+                            {% if cliente.posicion == 1 %}🥇
+                            {% elif cliente.posicion == 2 %}🥈
+                            {% elif cliente.posicion == 3 %}🥉
+                            {% else %}<span class="text-muted fs-6">#{{ cliente.posicion }}</span>{% endif %}
+                        </th>
+                        
+                        <td class="fw-bold text-dark">{{ cliente.nombre }}</td>
+                        <td class="text-muted small">{{ cliente.carrera }}</td>
+                        <td class="text-center fw-semibold text-primary">{{ cliente.compras }}</td>
+                        
+                        <td class="text-center pe-4">
+                            <span class="badge rounded-pill {% if cliente.posicion <= 3 %}bg-success{% else %}bg-secondary{% endif %}">
+                                ⭐ {{ cliente.puntos }} pts
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-end mt-4">
+    <button class="btn btn-primary fw-bold shadow-sm">
+        🎁 Enviar Cupón a los Top 3
+    </button>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - IngenioSnack</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #fdf6ec 0%, #fff 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        .login-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); width: 100%; max-width: 420px; }
+        .brand-title { color: #ff6b00; font-weight: 900; font-size: 3rem; margin-bottom: 0; text-align: center; }
+        .brand-subtitle { text-align: center; color: #6c757d; margin-bottom: 30px; font-size: 1.1rem; }
+        .form-label { font-weight: bold; color: #212529; font-size: 0.95rem; }
+        .form-control { border-radius: 12px; padding: 12px 15px; border: 1px solid #dee2e6; }
+        .btn-orange { background-color: #ff6b00; color: white; border-radius: 30px; padding: 12px; font-weight: bold; font-size: 1.1rem; border: none; transition: 0.3s; }
+        .btn-orange:hover { background-color: #e66000; color: white; transform: translateY(-2px); }
+        .link-back { text-align: center; display: block; margin-top: 25px; color: #8e8e8e; text-decoration: none; font-size: 0.95rem; }
+        .link-back:hover { color: #ff6b00; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <h1 class="brand-title">IngenioSnack</h1>
+    <p class="brand-subtitle">Panel de Administración</p>
+
+    <div class="login-card">
+        <h3 class="fw-bold mb-4">Iniciar Sesión</h3>
+
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" placeholder="admin@ingeniosnack.com" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-orange shadow-sm">Iniciar Sesión</button>
+            </div>
+        </form>
+
+        <a href="/login" class="link-back">Volver a login de estudiantes</a>
+    </div>
+
+</body>
+</html>

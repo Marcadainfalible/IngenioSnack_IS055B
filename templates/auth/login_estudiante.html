@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IngenioSnack - Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #fdf6ec 0%, #fff 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        .login-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); width: 100%; max-width: 420px; }
+        .brand-title { color: #ff6b00; font-weight: 900; font-size: 3rem; margin-bottom: 0; text-align: center; }
+        .brand-subtitle { text-align: center; color: #6c757d; margin-bottom: 30px; font-size: 1.1rem; }
+        .nav-pills { background: #f8f9fa; border-radius: 30px; padding: 5px; margin-bottom: 25px; }
+        .nav-pills .nav-link { border-radius: 25px; color: #6c757d; font-weight: bold; width: 50%; text-align: center; }
+        .nav-pills .nav-link.active { background-color: #ff6b00; color: white; }
+        .form-label { font-weight: bold; color: #212529; font-size: 0.95rem; }
+        .form-control { border-radius: 12px; padding: 12px 15px; border: 1px solid #dee2e6; }
+        .btn-orange { background-color: #ff6b00; color: white; border-radius: 30px; padding: 12px; font-weight: bold; font-size: 1.1rem; border: none; transition: 0.3s; }
+        .btn-orange:hover { background-color: #e66000; color: white; transform: translateY(-2px); }
+        .link-admin { text-align: center; display: block; margin-top: 25px; color: #8e8e8e; text-decoration: none; font-size: 0.95rem; }
+        .link-admin:hover { color: #ff6b00; text-decoration: underline; }
+        
+        /* Estilos del botón de Google */
+        .divider { display: flex; align-items: center; text-align: center; color: #adb5bd; margin: 20px 0; }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #dee2e6; }
+        .divider:not(:empty)::before { margin-right: .25em; }
+        .divider:not(:empty)::after { margin-left: .25em; }
+        .btn-google { background-color: white; border: 1px solid #dadce0; color: #3c4043; font-weight: bold; border-radius: 30px; padding: 10px; display: flex; justify-content: center; align-items: center; gap: 10px; text-decoration: none; transition: 0.2s; }
+        .btn-google:hover { background-color: #f8f9fa; color: #3c4043; }
+    </style>
+</head>
+<body>
+
+    <h1 class="brand-title">IngenioSnack</h1>
+    <p class="brand-subtitle">Tu snack favorito en el campus</p>
+
+    <div class="login-card">
+        <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="btn-tab-login" onclick="cambiarTab('login')">Iniciar Sesión</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="btn-tab-registro" onclick="cambiarTab('registro')">Registrarse</button>
+            </li>
+        </ul>
+
+        <form id="form-login" action="/procesar_login" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Código de Matrícula</label>
+                <input type="text" name="codigo" class="form-control" placeholder="Ej: 2024101136k" required pattern="[0-9]{10}[a-zA-Z]{1}">
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Contraseña</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="d-grid mb-4">
+                <button type="submit" class="btn btn-orange shadow-sm">Iniciar Sesión</button>
+            </div>
+            
+            <div class="divider">o si eres egresado</div>
+            
+            <div class="d-grid">
+                <a href="#" class="btn-google">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" alt="Google">
+                    Continuar con Google
+                </a>
+            </div>
+        </form>
+
+        <form id="form-registro" action="/procesar_registro" method="POST" class="d-none">
+            <div class="mb-3">
+                <label class="form-label">Código de Matrícula</label>
+                <input type="text" name="codigo" class="form-control" placeholder="Ej: 2024101136k" required pattern="[0-9]{10}[a-zA-Z]{1}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nombre Completo</label>
+                <input type="text" name="nombre" class="form-control" placeholder="Juan Pérez" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Contraseña</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••••" required minlength="6">
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-orange shadow-sm">Crear Cuenta</button>
+            </div>
+        </form>
+
+        <a href="/login/admin" class="link-admin mt-4">¿Eres administrador?</a>
+    </div>
+
+    <script>
+        function cambiarTab(tab) {
+            const formLogin = document.getElementById('form-login');
+            const formRegistro = document.getElementById('form-registro');
+            const btnLogin = document.getElementById('btn-tab-login');
+            const btnRegistro = document.getElementById('btn-tab-registro');
+
+            if (tab === 'login') {
+                formLogin.classList.remove('d-none');
+                formRegistro.classList.add('d-none');
+                btnLogin.classList.add('active');
+                btnRegistro.classList.remove('active');
+            } else {
+                formLogin.classList.add('d-none');
+                formRegistro.classList.remove('d-none');
+                btnLogin.classList.remove('active');
+                btnRegistro.classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>

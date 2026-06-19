@@ -24,3 +24,10 @@ class Pedido(db.Model):
 
     def __repr__(self):
         return f'<Pedido {self.ticket} - S/ {self.total}>'
+    
+class Producto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    precio = db.Column(db.Float, nullable=False)
+    categoria = db.Column(db.String(50), nullable=False) # 'Sándwiches', 'Bebidas' o 'Snacks'
+    disponible = db.Column(db.Boolean, default=True) # Para que el Sr. Julio pueda "apagar" un producto si se acaba
