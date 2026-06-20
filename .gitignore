@@ -1,0 +1,17 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Archivos secretos individuales
+.env
+
+# Base de datos SQLite (para que no se suban los datos de prueba)
+*.db
+*.sqlite3
+
+# Archivos de caché de Python e IDEs
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/

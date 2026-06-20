@@ -14,9 +14,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container">
             <a class="navbar-brand" href="/">IngenioSnack 🥪</a>
-            <div class="d-flex">
-                <a href="/admin" class="btn btn-outline-warning btn-sm">Acceso Admin</a>
-            </div>
+            <div class="d-flex align-items-center">
+            <span class="text-light me-3 d-none d-md-block small">Campus FIS</span>
+            <a href="/logout" class="btn btn-outline-warning btn-sm fw-bold px-3">
+                Cerrar Sesión 🚪
+            </a>
+        </div>
         </div>
     </nav>
 
@@ -28,5 +31,14 @@
     <footer class="text-center text-muted mt-5 mb-3">
         <small>&copy; 2026 Equipo IngenioSnack - Metodología XP</small>
     </footer>
+    <script>
+        window.onpageshow = function(event) {
+            // Si el navegador intenta cargar esta página desde su historial/caché secreto...
+            if (event.persisted) {
+                // ...lo forzamos a recargar la página directamente desde el servidor
+                window.location.reload(); 
+            }
+        };
+    </script>
 </body>
 </html>
