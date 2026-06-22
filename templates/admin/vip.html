@@ -1,57 +1,116 @@
 {% extends "admin/base_admin.html" %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold text-dark m-0">Salón de la Fama 🏆</h2>
-    <span class="badge bg-warning text-dark fs-6 shadow-sm">Top 5 Clientes Frecuentes</span>
-</div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vip.css') }}">
 
-<p class="text-muted">Estudiantes con mayor volumen de compras. Ideal para aplicar recompensas o el café gratis de la tarjeta de fidelidad.</p>
+<div class="dashboard-container">
+    
+    <div class="bento-banner mb-4">
+        <div class="banner-content">
+            <span class="badge-live"><span class="dot"></span> Dashboard en tiempo real</span>
+            <h1 class="fw-bold text-dark mt-2 mb-1">Salón de la Fama 🏆</h1>
+            <p class="text-muted m-0">Estudiantes con mayor volumen de compras en IngenioSnack. Ideal para aplicar la tarjeta de fidelidad.</p>
+        </div>
+        <button class="btn btn-premium shadow-sm btn-action-top">
+            🎁 Enviar Cupón a los Top 3
+        </button>
+    </div>
 
-<div class="card shadow-sm border-0 mt-4">
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col" class="text-center ps-3" style="width: 80px;">Top</th>
-                        <th scope="col">Estudiante</th>
-                        <th scope="col">Carrera</th>
-                        <th scope="col" class="text-center">Compras Totales</th>
-                        <th scope="col" class="text-center pe-4">Puntos de Fidelidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for cliente in clientes %}
-                    <tr class="{% if cliente.posicion == 1 %}table-warning{% elif cliente.posicion == 2 %}table-secondary{% elif cliente.posicion == 3 %}table-danger{% endif %}">
-                        
-                        <th scope="row" class="text-center ps-3 fs-4">
-                            {% if cliente.posicion == 1 %}🥇
-                            {% elif cliente.posicion == 2 %}🥈
-                            {% elif cliente.posicion == 3 %}🥉
-                            {% else %}<span class="text-muted fs-6">#{{ cliente.posicion }}</span>{% endif %}
-                        </th>
-                        
-                        <td class="fw-bold text-dark">{{ cliente.nombre }}</td>
-                        <td class="text-muted small">{{ cliente.carrera }}</td>
-                        <td class="text-center fw-semibold text-primary">{{ cliente.compras }}</td>
-                        
-                        <td class="text-center pe-4">
-                            <span class="badge rounded-pill {% if cliente.posicion <= 3 %}bg-success{% else %}bg-secondary{% endif %}">
-                                ⭐ {{ cliente.puntos }} pts
-                            </span>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="kpi-card shadow-sm">
+                <div class="kpi-icon icon-blue">📚</div>
+                <div class="kpi-data">
+                    <span class="kpi-title">TOTAL ESTUDIANTES</span>
+                    <h3 class="fw-bold m-0 text-dark">5</h3>
+                    <span class="kpi-sub">Registrados</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="kpi-card shadow-sm">
+                <div class="kpi-icon icon-orange">🏆</div>
+                <div class="kpi-data">
+                    <span class="kpi-title">COMPRAS TOTALES</span>
+                    <h3 class="fw-bold m-0 text-dark">152</h3>
+                    <span class="kpi-sub">Total acumulado</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="kpi-card shadow-sm">
+                <div class="kpi-icon icon-green">📊</div>
+                <div class="kpi-data">
+                    <span class="kpi-title">PROMEDIO COMPRAS</span>
+                    <h3 class="fw-bold m-0 text-dark">30.4</h3>
+                    <span class="kpi-sub">Fidelidad media</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="kpi-card shadow-sm">
+                <div class="kpi-icon icon-purple">👤</div>
+                <div class="kpi-data">
+                    <span class="kpi-title">PUNTOS TOTALES</span>
+                    <h3 class="fw-bold m-0 text-dark">1,520</h3>
+                    <span class="kpi-sub">En análisis</span>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="d-flex justify-content-end mt-4">
-    <button class="btn btn-primary fw-bold shadow-sm">
-        🎁 Enviar Cupón a los Top 3
-    </button>
+    <div class="row g-4">
+        <div class="col-12 col-lg-7">
+            <div class="bento-card p-4 h-100 shadow-sm">
+                <h4 class="fw-bold text-dark mb-4">Salón de la Fama</h4>
+                <div class="ranking-list">
+                    {% for cliente in clientes %}
+                    <div class="ranking-item {% if cliente.posicion == 1 %}rank-1{% elif cliente.posicion == 2 %}rank-2{% elif cliente.posicion == 3 %}rank-3{% endif %} d-flex align-items-center justify-content-between p-3 mb-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="avatar-container position-relative">
+                                <span class="badge-position position-absolute top-0 start-0 translate-middle">{{ cliente.posicion }}</span>
+                                <div class="avatar-placeholder">👤</div>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold m-0 text-dark">{{ cliente.nombre }}</h6>
+                                <small class="text-muted">{{ cliente.carrera }}</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-4 text-end">
+                            <div>
+                                <span class="fw-bold text-dark fs-5">{{ cliente.compras }}u.</span>
+                                <div class="progress mt-1" style="width: 70px; height: 6px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: {% if cliente.posicion == 1 %}40%{% elif cliente.posicion == 2 %}20%{% else %}10%{% endif %}"></div>
+                                </div>
+                            </div>
+                            <span class="badge-puntos-pill">⭐ {{ cliente.puntos }} pts</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-5">
+            <div class="bento-card p-4 h-100 shadow-sm">
+                <h4 class="fw-bold text-dark mb-3">Fidelidad por Carrera</h4>
+                <p class="text-muted small mb-4">Distribución porcentual del volumen de interacción comercial en el sistema.</p>
+                
+                <div class="chart-mockup-container d-flex flex-column align-items-center justify-content-center py-4">
+                    <div class="circular-progress-mock">
+                        <div class="inner-circle"></div>
+                    </div>
+                    
+                    <div class="chart-legends d-flex flex-wrap justify-content-center gap-3 mt-4">
+                        <span class="legend-item"><span class="dot bg-info"></span> Sis. (40%)</span>
+                        <span class="legend-item"><span class="dot bg-warning"></span> Soft. (35%)</span>
+                        <span class="legend-item"><span class="dot bg-danger"></span> Ind. (15%)</span>
+                        <span class="legend-item"><span class="dot bg-primary"></span> Civil (10%)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
 {% endblock %}
