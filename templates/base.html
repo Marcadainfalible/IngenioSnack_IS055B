@@ -8,6 +8,27 @@
     <style>
         body { background-color: #f8f9fa; }
         .navbar-brand { font-weight: bold; color: #ff9800 !important; }
+
+        .contenedor-img {
+            width: 100%;
+            height: 180px;          /* Altura fija para que todas las tarjetas midan igual */
+            padding: 12px;          /* Espaciado interno (padding) para que la imagen no choque con los bordes */
+            display: flex;          /* Activamos flexbox para centrar */
+            justify-content: center;/* Centrado horizontal de la imagen */
+            align-items: center;    /* Centrado vertical de la imagen */
+            background-color: #f9f9f9; /* Fondo sutil por si la imagen tiene transparencias */
+            box-sizing: border-box; /* Asegura que el padding no deforme los 180px de altura */
+        }
+                
+        .img-producto {
+            max-width: 100%;        /* No permite que la imagen se desborde del contenedor */
+            max-height: 100%;       /* No permite que altere la altura asignada */
+            width: auto;            /* Mantiene la proporción original a lo ancho */
+            height: 200px;           /* Mantiene la proporción original a lo alto */
+            object-fit: contain;    /* ESCENCIAL: Escala la imagen para que se vea completa sin recortarse ni estirarse */
+            border-radius: 8px;     /* Bordes suavemente redondeados para la foto */
+        }   
+
     </style>
 </head>
 <body>
@@ -15,7 +36,7 @@
         <div class="container">
             <a class="navbar-brand" href="/">IngenioSnack 🥪</a>
             <div class="d-flex align-items-center">
-            <span class="text-light me-3 d-none d-md-block small">Campus FIS</span>
+            <span class="text-light me-3 d-none d-md-block small"> <strong> {{nombre_alumno}} </strong> </span>
             <a href="/logout" class="btn btn-outline-warning btn-sm fw-bold px-3">
                 Cerrar Sesión 🚪
             </a>
