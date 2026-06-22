@@ -4,43 +4,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - IngenioSnack</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        body { background: linear-gradient(135deg, #fdf6ec 0%, #fff 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-        .login-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); width: 100%; max-width: 420px; }
-        .brand-title { color: #ff6b00; font-weight: 900; font-size: 3rem; margin-bottom: 0; text-align: center; }
-        .brand-subtitle { text-align: center; color: #6c757d; margin-bottom: 30px; font-size: 1.1rem; }
-        .form-label { font-weight: bold; color: #212529; font-size: 0.95rem; }
-        .form-control { border-radius: 12px; padding: 12px 15px; border: 1px solid #dee2e6; }
-        .btn-orange { background-color: #ff6b00; color: white; border-radius: 30px; padding: 12px; font-weight: bold; font-size: 1.1rem; border: none; transition: 0.3s; }
-        .btn-orange:hover { background-color: #e66000; color: white; transform: translateY(-2px); }
-        .link-back { text-align: center; display: block; margin-top: 25px; color: #8e8e8e; text-decoration: none; font-size: 0.95rem; }
-        .link-back:hover { color: #ff6b00; text-decoration: underline; }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background: linear-gradient(135deg,#ff7b00,#ffb347);
+            font-family: 'Segoe UI', sans-serif;
+            position:relative;
+            overflow:hidden;
+        }
+
+        /* Círculos decorativos */
+        body::before,
+        body::after{
+            content:'';
+            position:absolute;
+            border-radius:50%;
+            background:rgba(255,255,255,0.15);
+        }
+
+        body::before{
+            width:300px;
+            height:300px;
+            top:-100px;
+            left:-100px;
+        }
+
+        body::after{
+            width:250px;
+            height:250px;
+            bottom:-80px;
+            right:-80px;
+        }
+
+        .login-card{
+            width:100%;
+            max-width:430px;
+            padding:45px;
+            border-radius:30px;
+            background:rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow:0 20px 50px rgba(0,0,0,.15);
+            animation: fadeIn .8s ease;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        .logo-circle{
+            width:90px;
+            height:90px;
+            background:linear-gradient(135deg,#ff7b00,#ff9800);
+            border-radius:50%;
+            margin:0 auto 20px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            font-size:2rem;
+            box-shadow:0 8px 20px rgba(255,123,0,.3);
+        }
+
+        .brand-title{
+            text-align:center;
+            font-weight:800;
+            color:#ff6b00;
+            margin-bottom:5px;
+        }
+
+        .brand-subtitle{
+            text-align:center;
+            color:#777;
+            margin-bottom:30px;
+        }
+
+        .form-label{
+            font-weight:600;
+            color:#444;
+        }
+
+        .input-group-text{
+            border-radius:15px 0 0 15px;
+            border:none;
+            background:#f3f4f6;
+        }
+
+        .form-control{
+            border:none;
+            background:#f3f4f6;
+            padding:14px;
+            border-radius:0 15px 15px 0;
+        }
+
+        .form-control:focus{
+            background:#fff;
+            box-shadow:0 0 0 3px rgba(255,107,0,.2);
+        }
+
+        .btn-orange{
+            background:linear-gradient(135deg,#ff6b00,#ff9800);
+            color:white;
+            border:none;
+            border-radius:15px;
+            padding:14px;
+            font-size:1rem;
+            font-weight:700;
+            transition:.3s;
+        }
+
+        .btn-orange:hover{
+            transform:translateY(-3px);
+            box-shadow:0 10px 20px rgba(255,107,0,.3);
+            color:white;
+        }
+
+        .link-back{
+            display:block;
+            text-align:center;
+            margin-top:25px;
+            color:#666;
+            text-decoration:none;
+            font-size:.95rem;
+        }
+
+        .link-back:hover{
+            color:#ff6b00;
+        }
     </style>
 </head>
+
 <body>
 
-    <h1 class="brand-title">IngenioSnack</h1>
-    <p class="brand-subtitle">Panel de Administración</p>
-
     <div class="login-card">
-        <h3 class="fw-bold mb-4">Iniciar Sesión</h3>
+
+        <div class="logo-circle">
+            <i class="fas fa-user-shield"></i>
+        </div>
+
+        <h2 class="brand-title">IngenioSnack</h2>
+        <p class="brand-subtitle">Panel de Administración</p>
 
         <form action="/procesar_login_admin" method="POST">
+
             <div class="mb-3">
                 <label class="form-label">Correo Electrónico</label>
-                <input type="email" name="email" class="form-control" placeholder="admin@ingeniosnack.com" required>
+
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+
+                    <input type="email"
+                           name="email"
+                           class="form-control"
+                           placeholder="admin@ingeniosnack.com"
+                           required>
+                </div>
             </div>
+
             <div class="mb-4">
                 <label class="form-label">Contraseña</label>
-                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fas fa-lock"></i>
+                    </span>
+
+                    <input type="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="••••••••"
+                           required>
+                </div>
             </div>
+
             <div class="d-grid">
-                <button type="submit" class="btn btn-orange shadow-sm">Iniciar Sesión</button>
+                <button type="submit" class="btn btn-orange">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Iniciar Sesión
+                </button>
             </div>
+
         </form>
 
-        <a href="/login" class="link-back">Volver a login de estudiantes</a>
+        <a href="/login" class="link-back">
+            ← Volver al login de estudiantes
+        </a>
+
     </div>
 
 </body>
