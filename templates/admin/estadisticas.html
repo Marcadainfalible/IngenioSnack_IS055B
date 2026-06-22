@@ -1,71 +1,471 @@
 {% extends "admin/base_admin.html" %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold text-dark m-0">Inteligencia de Negocios 📊</h2>
-    <span class="badge bg-danger bg-gradient fs-6 shadow-sm">Filtro Activo: Semana de Parciales 📚</span>
-</div>
 
-<div class="row g-4">
-    <div class="col-lg-8">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-header bg-white fw-bold py-3 text-secondary">
-                Top 5: Productos Más Vendidos
-            </div>
-            <div class="card-body d-flex align-items-center">
-                <canvas id="graficoVentas" height="120"></canvas>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/estadisticos_admmin.css') }}">
+
+<div class="dashboard-wrap">
+
+    <!-- Encabezado moderno -->
+    <div class="hero-panel mb-4 fade-in-up">
+        <div class="hero-inner d-flex justify-content-between align-items-center flex-wrap gap-3 position-relative">
+            <div>
+                <span class="hero-mini mb-2">● Dashboard en tiempo real</span>
+                <h2 class="page-title fs-2">Inteligencia de Negocios</h2>
+                <p class="page-subtitle mb-0 small">Panel analítico de ventas de IngenioSnack</p>
             </div>
         </div>
     </div>
-    
-    <div class="col-lg-4">
-        <div class="card shadow-sm border-0 bg-primary bg-gradient text-white h-100 position-relative overflow-hidden">
-            <div class="card-body p-4 d-flex flex-column justify-content-center">
-                <h5 class="card-title fw-bold mb-4 opacity-75">El Rey de los Parciales 👑</h5>
-                <h2 class="display-5 fw-bold mb-0">☕ Café</h2>
-                <p class="fs-5 mt-2 opacity-75">185 unidades vendidas</p>
-                <button class="btn btn-light text-primary fw-bold mt-auto w-100 shadow-sm">Exportar Reporte (.CSV)</button>
+
+    <div id="contenidoEstadisticas">
+
+        <!-- KPIs -->
+        <div class="row g-3 mb-2">
+
+            <div class="col-6 col-xl-3">
+                <div class="card stat-card accent-cyan h-100 fade-in-up">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="stat-icon">📦</div>
+                        <div class="overflow-hidden">
+                            <div class="stat-label">Unidades Vendidas</div>
+                            <div class="stat-value" id="kpiTotal">0</div>
+                            <div class="stat-caption">Ventas registradas</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="position-absolute end-0 bottom-0 opacity-25" style="font-size: 8rem; transform: translate(20px, 30px);">📈</div>
+
+            <div class="col-6 col-xl-3">
+                <div class="card stat-card accent-yellow h-100 fade-in-up">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="stat-icon">🏆</div>
+                        <div class="overflow-hidden">
+                            <div class="stat-label">Producto Líder</div>
+                            <div class="stat-value fs-6 text-truncate" id="kpiLider">—</div>
+                            <div class="stat-caption">Más vendido</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-xl-3">
+                <div class="card stat-card accent-coral h-100 fade-in-up">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="stat-icon">📊</div>
+                        <div class="overflow-hidden">
+                            <div class="stat-label">Promedio / Producto</div>
+                            <div class="stat-value" id="kpiPromedio">0</div>
+                            <div class="stat-caption">Rendimiento medio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-xl-3">
+                <div class="card stat-card accent-blue h-100 fade-in-up">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <div class="stat-icon">🛍️</div>
+                        <div class="overflow-hidden">
+                            <div class="stat-label">Productos Activos</div>
+                            <div class="stat-value" id="kpiCount">0</div>
+                            <div class="stat-caption">En análisis</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <!-- Gráficos -->
+        <div class="row g-4 mt-1">
+
+            <div class="col-lg-7">
+                <div class="card chart-card h-100 fade-in-up">
+                    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <div>
+                            <div class="card-title-sm">Top 5: Productos Más Vendidos</div>
+                            <div class="card-subtitle-xs">Comparación de unidades vendidas por producto</div>
+                        </div>
+
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button class="btn btn-chip active" id="btnBar" onclick="cambiarTipo('bar')">
+                                Barras
+                            </button>
+                            <button class="btn btn-chip" id="btnLine" onclick="cambiarTipo('line')">
+                                Línea
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <canvas id="graficoVentas" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="card chart-card h-100 fade-in-up">
+                    <div class="card-header">
+                        <div class="card-title-sm">Participación por Producto</div>
+                        <div class="card-subtitle-xs">Distribución porcentual de ventas</div>
+                    </div>
+
+                    <div class="card-body">
+                        <canvas id="graficoDona" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Ranking y Producto Estrella -->
+        <div class="row g-4 mt-1 mb-4">
+
+            <div class="col-lg-7">
+                <div class="card chart-card h-100 fade-in-up">
+                    <div class="card-header">
+                        <div class="card-title-sm">Ranking Detallado</div>
+                        <div class="card-subtitle-xs">Ordenado de mayor a menor venta</div>
+                    </div>
+
+                    <div class="card-body" id="rankingBody"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="card star-card h-100 position-relative fade-in-up">
+                    <div class="card-body star-body p-4 d-flex flex-column justify-content-center position-relative">
+
+                        <span class="star-chip align-self-start mb-3">
+                            PRODUCTO ESTRELLA
+                        </span>
+
+                        <h5 class="star-title mb-3">
+                            Producto con mayor venta
+                        </h5>
+
+                        <h2 class="star-name mb-0" id="liderNombre">
+                            —
+                        </h2>
+
+                        <p class="mt-2 opacity-75 mb-4">
+                            <span id="liderUnidades">0</span> unidades vendidas
+                        </p>
+
+                        <button class="btn btn-light text-primary btn-export mt-auto w-100" onclick="exportarCSV()">
+                            ⬇ Exportar Reporte CSV
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
+    <!-- Estado vacío -->
+    <div id="estadoVacio" class="empty-state d-none">
+        <div class="empty-icon">📭</div>
+        <h5 class="empty-title fw-bold mt-3 mb-1">
+            Aún no hay datos de ventas
+        </h5>
+        <p class="mb-0">
+            Cuando se registren pedidos, las estadísticas aparecerán aquí automáticamente.
+        </p>
+    </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    // Recibimos los datos directamente desde Python usando Jinja2 a JSON
+    // Datos enviados desde Flask vía Jinja2
     const etiquetas = {{ ventas.labels | tojson }};
     const datos = {{ ventas.valores | tojson }};
 
-    const ctx = document.getElementById('graficoVentas').getContext('2d');
-    
-    new Chart(ctx, {
-        type: 'bar', // Gráfico de barras
-        data: {
-            labels: etiquetas,
-            datasets: [{
-                label: 'Unidades Vendidas',
-                data: datos,
-                backgroundColor: [
-                    'rgba(13, 110, 253, 0.8)', // Azul Bootstrap
-                    'rgba(255, 193, 7, 0.8)',  // Amarillo
-                    'rgba(25, 135, 84, 0.8)',  // Verde
-                    'rgba(220, 53, 69, 0.8)',  // Rojo
-                    'rgba(111, 66, 193, 0.8)'  // Morado
-                ],
-                borderRadius: 6 // Bordes redondeados modernos
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false } // Ocultamos la leyenda para que se vea más limpio
-            },
-            scales: {
-                y: { beginAtZero: true }
-            }
+    const paleta = [
+        '#10c7b7',
+        '#f59e0b',
+        '#f43f5e',
+        '#3b82f6',
+        '#8b5cf6',
+        '#22c55e',
+        '#0f172a',
+        '#06b6d4'
+    ];
+
+    // ---------- Validación de datos vacíos ----------
+    const hayDatos = Array.isArray(etiquetas) && Array.isArray(datos)
+        && etiquetas.length > 0
+        && datos.length > 0
+        && datos.reduce((a, b) => a + Number(b || 0), 0) > 0;
+
+    if (!hayDatos) {
+        document.getElementById('contenidoEstadisticas').classList.add('d-none');
+        document.getElementById('estadoVacio').classList.remove('d-none');
+    } else {
+
+        // ---------- Datos base ----------
+        const total = datos.reduce((a, b) => a + Number(b || 0), 0);
+        const maxIdx = datos.indexOf(Math.max(...datos));
+        const promedio = Math.round(total / datos.length);
+
+        const ordenado = etiquetas.map((nombre, i) => ({
+            nombre,
+            valor: Number(datos[i] || 0),
+            color: paleta[i % paleta.length]
+        })).sort((a, b) => b.valor - a.valor);
+
+        const top5 = ordenado.slice(0, 5);
+
+        // ---------- KPIs ----------
+        function animarContador(id, valorFinal, sufijo = '') {
+            const el = document.getElementById(id);
+            let actual = 0;
+            const pasos = 34;
+            const incremento = valorFinal / pasos;
+
+            const intervalo = setInterval(() => {
+                actual += incremento;
+
+                if (actual >= valorFinal) {
+                    actual = valorFinal;
+                    clearInterval(intervalo);
+                }
+
+                el.textContent = Math.round(actual).toLocaleString('es-PE') + sufijo;
+            }, 18);
         }
-    });
+
+        animarContador('kpiTotal', total);
+        animarContador('kpiPromedio', promedio);
+        animarContador('kpiCount', datos.length);
+
+        document.getElementById('kpiLider').textContent = etiquetas[maxIdx];
+        document.getElementById('liderNombre').textContent = etiquetas[maxIdx];
+        document.getElementById('liderUnidades').textContent = Number(datos[maxIdx] || 0).toLocaleString('es-PE');
+
+        // ---------- Ranking detallado ----------
+        const rankingBody = document.getElementById('rankingBody');
+
+        ordenado.forEach((item, i) => {
+            const pct = Math.round((item.valor / total) * 100);
+
+            const fila = document.createElement('div');
+            fila.className = 'ranking-row d-flex align-items-center gap-3';
+
+            fila.innerHTML = `
+                <span class="rank-badge" style="background: linear-gradient(135deg, ${item.color}, #111827);">
+                    ${i + 1}
+                </span>
+
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-center gap-2">
+                        <span class="fw-bold text-truncate" style="color: var(--is-dark);">
+                            ${item.nombre}
+                        </span>
+
+                        <span class="text-muted small flex-shrink-0">
+                            ${item.valor.toLocaleString('es-PE')} u. · ${pct}%
+                        </span>
+                    </div>
+
+                    <div class="progress progress-thin mt-2">
+                        <div class="progress-bar"
+                             role="progressbar"
+                             style="width:0%; background: linear-gradient(90deg, ${item.color}, #111827);"
+                             data-width="${pct}">
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            rankingBody.appendChild(fila);
+        });
+
+        setTimeout(() => {
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                bar.style.transition = 'width .9s cubic-bezier(.2,.8,.2,1)';
+                bar.style.width = bar.dataset.width + '%';
+            });
+        }, 180);
+
+        // ---------- Gráfico principal ----------
+        const ctx = document.getElementById('graficoVentas').getContext('2d');
+
+        let graficoVentas = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: top5.map(item => item.nombre),
+                datasets: [{
+                    label: 'Unidades Vendidas',
+                    data: top5.map(item => item.valor),
+                    backgroundColor: top5.map(item => item.color + 'CC'),
+                    borderColor: top5.map(item => item.color),
+                    borderWidth: 2,
+                    borderRadius: 12,
+                    borderSkipped: false,
+                    tension: 0.35,
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    duration: 850,
+                    easing: 'easeOutQuart'
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#111827',
+                        titleColor: '#ffffff',
+                        bodyColor: '#e5e7eb',
+                        padding: 12,
+                        cornerRadius: 12,
+                        displayColors: false,
+                        callbacks: {
+                            label: ctx => ` ${ctx.formattedValue} unidades vendidas`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#64748b',
+                            font: {
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(226,232,240,.8)'
+                        },
+                        border: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#64748b',
+                            font: {
+                                weight: '700'
+                            }
+                        },
+                        grid: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // ---------- Cambiar gráfico barras / línea ----------
+        function cambiarTipo(tipo) {
+            graficoVentas.config.type = tipo;
+            graficoVentas.data.datasets[0].fill = tipo === 'line';
+
+            if (tipo === 'line') {
+                graficoVentas.data.datasets[0].backgroundColor = 'rgba(16,199,183,.16)';
+                graficoVentas.data.datasets[0].borderColor = '#10c7b7';
+                graficoVentas.data.datasets[0].pointBorderColor = '#10c7b7';
+            } else {
+                graficoVentas.data.datasets[0].backgroundColor = top5.map(item => item.color + 'CC');
+                graficoVentas.data.datasets[0].borderColor = top5.map(item => item.color);
+            }
+
+            graficoVentas.update();
+
+            document.getElementById('btnBar').classList.toggle('active', tipo === 'bar');
+            document.getElementById('btnLine').classList.toggle('active', tipo === 'line');
+        }
+
+        window.cambiarTipo = cambiarTipo;
+
+        // ---------- Gráfico de dona ----------
+        new Chart(document.getElementById('graficoDona'), {
+            type: 'doughnut',
+            data: {
+                labels: etiquetas,
+                datasets: [{
+                    data: datos,
+                    backgroundColor: paleta,
+                    borderWidth: 4,
+                    borderColor: '#ffffff',
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    animateScale: true,
+                    duration: 850
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 10,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            padding: 16,
+                            color: '#64748b',
+                            font: {
+                                size: 11,
+                                weight: '700'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#111827',
+                        titleColor: '#ffffff',
+                        bodyColor: '#e5e7eb',
+                        padding: 12,
+                        cornerRadius: 12,
+                        callbacks: {
+                            label: ctx => {
+                                const valor = Number(ctx.raw || 0);
+                                const pct = Math.round((valor / total) * 100);
+                                return ` ${ctx.label}: ${valor} unidades · ${pct}%`;
+                            }
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+
+        // ---------- Exportar CSV ----------
+        function exportarCSV() {
+            let csv = 'Producto,Unidades Vendidas\n';
+
+            etiquetas.forEach((nombre, i) => {
+                csv += `"${nombre}",${datos[i]}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const enlace = document.createElement('a');
+
+            enlace.href = url;
+            enlace.download = 'reporte_ventas_ingeniosnack.csv';
+            enlace.click();
+
+            URL.revokeObjectURL(url);
+        }
+
+        window.exportarCSV = exportarCSV;
+    }
 </script>
+
 {% endblock %}
