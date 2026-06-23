@@ -36,7 +36,7 @@
         <div class="container">
             <a class="navbar-brand" href="/">IngenioSnack 🥪</a>
             <div class="d-flex align-items-center">
-            <span class="text-light me-3 d-none d-md-block small"> <strong> {{nombre_alumno}} </strong> </span>
+            <span class="text-light me-3 d-none d-md-block small"> <strong> {{session.get('estudiante_nombre', 'Estudiante')}} </strong> </span>
             <a href="/logout" class="btn btn-outline-warning btn-sm fw-bold px-3">
                 Cerrar Sesión 🚪
             </a>

@@ -1,12 +1,76 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ticket.css') }}">
+
+
 <!-- templates/exito.html -->
-<div style="font-family: Arial; text-align: center; padding: 50px; background: #fff3e0;">
-    <div style="background: white; padding: 30px; border-radius: 10px; max-width: 300px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <h2>¡Pedido Confirmado! ✅</h2>
-        <p>Pasa a recogerlo a la cafetería.</p>
-        <h1 style="color: #2e7d32;">Total: S/ {{ total }}</h1>
-        <p>💳 Pago contra entrega</p>
-        <hr>
-        <p style="color: #ff9800;"><b>⭐ ¡Felicidades! Ganaste 1 sello de fidelidad.</b></p>
-        <a href="/" style="text-decoration: none; color: #1976d2;">Hacer otro pedido</a>
+<div id="toast" class="toast">¡Copiado exitoso!</div>
+
+    <div class="container">
+        <div class="card">
+            <div class="main">
+                <div class="co-img">
+                    <h1>Ingenio<br>Snack 🥪</h1>
+                </div>
+
+                <div class="vertical"></div>
+
+                <div class="content">
+                    <h2>Ticket de Compra</h2>  
+                    <h2>{{session.get('estudiante_nombre', 'Estudiante')}}</h2> 
+                    <p id="fecha-ticket">
+                        <p>Fecha: {{ pedido.fecha.strftime('%d/%m/%Y') }}</p>
+                        <p>Hora: {{ pedido.fecha.strftime('%H:%M') }}</p>
+                    </p>
+
+                </div>
+            </div>
+        
+        <div class="producto-lista">
+            {% for producto in pedido.detalle_productos.split(' + ') %}
+            <h2>{{ loop.index }} <span>{{ producto }}</span></h2>
+            {% endfor %} 
+            
+            <h2 style="font-size: 17px; margin-top: 10px; border-top: 1px solid #ccc; padding-top: 5px;">
+                <h2 style="font-size: 13px;"><span>Delivery</span> <span>S/. 5.00</span></h2>
+                <h2 style="font-weight: 700;"><span>Subtotal</span>S/. {{ "%.2f"|format(subtotal) }}</h2>
+                
+                <h2 style="font-size: 17px; margin-top: 10px; border-top: 1px solid #ccc; padding-top: 5px;">
+                <span>Total</span> <span>S/ {{ "%.2f"|format(total) }}</span>
+            </h2>
+            </h2>
+        </div>
+        
+        <div class="copy-button">
+            <input id="copyvalue" type="text" readonly value="{{ pedido.ticket }}" />
+            <button onclick="copyIt()" class="copybtn">Copiar</button>
+        </div>
+        </div>
+
+        <button class="btn-return" onclick="window.history.back()">Hacer otro pedido</button>
+
+        <script>
+            // Función para copiar el código al portapapeles y mostrar la notificación
+            function copyIt() {
+                const copyText = document.getElementById("copyvalue");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); // Para dispositivos móviles
+                
+                navigator.clipboard.writeText(copyText.value)
+                    .then(() => {
+                        // Seleccionamos el elemento toast
+                        const toast = document.getElementById("toast");
+                        
+                        // Le añadimos la clase 'show' para que aparezca
+                        toast.classList.add("show");
+                        
+                        // Lo ocultamos automáticamente después de 2.5 segundos
+                        setTimeout(function() {
+                            toast.classList.remove("show");
+                        }, 2500);
+                    })
+                    .catch(err => {
+                        console.error('Error al copiar: ', err);
+                    });
+            }
+        </script>
+
     </div>
-</div>
