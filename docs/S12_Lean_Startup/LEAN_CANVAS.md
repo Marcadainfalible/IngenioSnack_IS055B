@@ -1,58 +1,15 @@
-# 1. El Lienzo Lean Startup (Modelo de Negocio Simplificado)
+# 📊 LIENZO LEAN CANVAS - INGENIOSNACK
 
-Este documento contiene el **Lean Canvas de 9 bloques** adaptado formalmente para el nuevo servicio de suscripciones mensuales de **IngenioSnack**.
-
----
-
-### 🚨 BLOQUES PRINCIPALES REQUERIDOS
-
-#### 1. PROBLEMA
-> **Identificación del Problema:**
-> * **Pérdida de tiempo crítica:** Largas colas en los quioscos de la universidad durante los recesos de clase cortos, lo que provoca tardanzas en los estudiantes.
-> * **Presupuesto universitario descontrolado:** Los alumnos incurren de manera diaria en un "gasto hormiga" elevado al comprar snacks individuales e imprevistos de forma fragmentada.
-> * **Falta de predictibilidad alimentaria:** No existen alternativas dentro del campus que permitan asegurar un break diario o desayuno programado de forma automática y económica.
-
-#### 4. SOLUCIÓN
-> **Descripción de la Solución:**
-> * **Módulo Web de Suscripciones:** Desarrollo de una plataforma digital nativa donde el estudiante gestiona y paga anticipadamente su plan de consumo mensual.
-> * **Despacho Fast-Track (Cero Colas):** Implementación de códigos QR rápidos para que el usuario retire su pack asignado en puntos estratégicos de la facultad en menos de 30 segundos.
-> * **Cajas de Breaks Personalizables:** Herramienta interna en el sistema para que el suscriptor arme su pack semanal combinando café, bebidas y snacks según sus preferencias.
-
-#### 3. PROPUESTA DE VALOR ÚNICA
-> **Nuestra Propuesta de Valor:**
-> * **"Ahorra tiempo y dinero asegurando tus breaks del mes con un solo clic."**
-> * Conectamos comodidad y previsión financiera: garantizamos un snack diario o interdiario listo para retirar, reduciendo los costos individuales de adquisición en el campus mediante un único abono mensual.
-
-#### 8. MÉTRICAS CLAVE (¿Cómo sabremos si es un éxito?)
-> **Indicadores de Éxito:**
-> * **MRR (Ingreso Mensual Recurrente):** Volumen de dinero total asegurado a inicios de mes mediante membresías activas.
-> * **Tasa de Retención / Churn:** Porcentaje de estudiantes que renuevan o cancelan su suscripción al término del ciclo mensual.
-> * **Frecuencia de Uso del QR:** Cantidad de recojos efectivos semanales que validan la adopción diaria de la plataforma por parte de los usuarios.
-
-#### 9. VENTAJA INJUSTA (¿Qué tenemos que otros no pueden copiar fácilmente?)
-> **Nuestra Ventaja Competitiva:**
-> * **Infraestructura Tecnológica Integrada Nativamente:** Poseemos un sistema web modular en Flask acoplado a un dashboard de Inteligencia de Negocios optimizado para la gestión masiva de stock y control de fidelidad. Esto nos otorga una agilidad operativa y de recojo que los puestos tradicionales o comerciales ambulantes de la facultad no pueden replicar a corto plazo.
+| 🧩 PROBLEMA | ⚙️ SOLUCIÓN | 💎 PROPOSICIÓN DE VALOR ÚNICA | 🚀 VENTAJA ESPECIAL | 👥 SEGMENTO DE CLIENTES |
+| :--- | :--- | :--- | :--- | :--- |
+| **Problemas Top 3:**<br>• Falta de snacks saludables y energéticos en el campus.<br>• Poca personalización o fidelización para consumidores.<br>• Procesos de compra lentos y colas en recesos.<br><br>*(Alternativas):*<br>• Máquinas expendedoras convencionales.<br>• Quioscos de la facultad.<br>• Comercio ambulatorio fuera. | **Características clave:**<br>• **Suscripción Premium:** Planes semanales/mensuales autogestionables a menor costo unitario.<br>• **Catálogo Nutritivo:** Selección de snacks según preferencias.<br>• **Retiro Rápido:** Dashboard digital para despacho sin colas. | **Frase clara y simple:**<br><br>"Energía saludable y personalizada para tu día universitario, directo a tu alcance mediante un modelo de suscripción inteligente que premia tu fidelidad y ahorra tu tiempo." | **¿Qué nos hace diferentes?**<br><br>Integración directa en el entorno universitario que combina accesibilidad física inmediata, precios adaptados a la economía estudiantil y una plataforma web sin colas. | **Segmento Objetivo:**<br>• Estudiantes, docentes y administrativos que buscan optimizar su alimentación diaria.<br><br>*(Early Adopters):*<br>• Estudiantes de ciclos avanzados con horarios cruzados o laboratorios extensos. |
+| | **📊 METRICAS CLAVE** | | **📢 CANALES** | |
+| | • **Tasa de Retención:** % de usuarios que renuevan el plan.<br>• **Costo de Adquisición (CAC):** Inversión para registrar un nuevo suscriptor.<br>• **Frecuencia de Consumo:** Snacks retirados por semana. | | • Plataforma web integrada (Módulo VIP).<br>• Módulos físicos de despacho en los pabellones.<br>• Correo institucional y mensajería directa. | |
 
 ---
 
-### 📦 BLOQUES COMPLEMENTARIOS DEL LIENZO
+### 💳 VIABILIDAD FINANCIERA
 
-#### 2. SEGMENTO DE CLIENTES
-* **Clientes Principales:** Estudiantes de la Universidad Nacional del Centro del Perú (UNCP).
-* **Foco Estratégico:** Alumnos de la Facultad de Ciencias Contables (usuarios de horarios ajustados que priorizan el control analítico de costos y presupuestos).
-
-#### 5. CANALES
-* **Plataforma Web Directa:** Módulo de Clientes VIP dentro del sistema local de IngenioSnack.
-* **Canal de Alertas Automatizado:** Integración de notificaciones e inscripciones asistidas a través de WhatsApp Business.
-* **Marketing Interno:** Difusión orgánica y recomendaciones directas de estudiantes en los pabellones académicos.
-
-#### 6. FUENTES DE INGRESOS
-* **Cobros Recurrentes por Membresía:** Modelado transaccional mensual mediante pasarelas y billeteras digitales (Yape, Plin):
-  * *Plan Snack Esencial (Interdiario):* S/ 25.00 mensuales.
-  * *Plan Snack Premium VIP (Diario + Café de Fidelidad):* S/ 45.00 mensuales.
-* **Upselling:** Micro-pagos añadidos por la inclusión de snacks premium o complementos extra al pack base.
-
-#### 7. ESTRUCTURA DE COSTES
-* **Costo de Producción por Volumen:** Adquisición masiva de insumos alimentarios y empaques ecológicos al por mayor para abaratar costos unitarios.
-* **Soporte Tecnológico:** Costo mínimo de mantenimiento técnico de la base de datos, hosting y despliegue del software.
-* **Logística y Despacho:** Operación de empaquetado y distribución en los puntos asignados de control de la facultad.
+| 💰 ESTRUCTURA DE COSTES | 💵 FLUJO DE INGRESOS |
+| :--- | :--- |
+| **Gastos operativos:**<br>• Adquisición de snacks saludables de calidad.<br>• Hosting, mantenimiento y desarrollo del sistema web.<br>• Logística de distribución dentro del campus.<br>• Marketing operativo y promociones de lanzamiento. | **Cómo ganamos dinero:**<br>• Ingresos recurrentes por tarifas de suscripción (Planes VIP Semanales y Mensuales).<br>• Ventas directas de snacks adicionales fuera del plan.<br>• Márgenes por alianzas estratégicas con proveedores locales. 
