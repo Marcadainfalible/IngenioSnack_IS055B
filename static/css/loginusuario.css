@@ -1,0 +1,204 @@
+
+    body{
+        min-height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background: linear-gradient(135deg,#ff7b00,#ffb347);
+        font-family:'Segoe UI',sans-serif;
+        overflow:hidden;
+        position:relative;
+    }
+
+    body::before,
+    body::after{
+        content:'';
+        position:absolute;
+        border-radius:50%;
+        background:rgba(255,255,255,0.12);
+    }
+
+    body::before{
+        width:320px;
+        height:320px;
+        top:-120px;
+        left:-120px;
+    }
+
+    body::after{
+        width:260px;
+        height:260px;
+        bottom:-90px;
+        right:-90px;
+    }
+
+    .brand-title{
+        color:white;
+        font-size:3.3rem;
+        font-weight:900;
+        margin-bottom:0;
+        text-shadow:0 3px 8px rgba(0,0,0,.15);
+    }
+
+    .brand-subtitle{
+        color:white;
+        opacity:.95;
+        margin-bottom:30px;
+        font-size:1.1rem;
+    }
+
+    .login-card{
+        background:rgba(255,255,255,.95);
+        backdrop-filter:blur(10px);
+        width:100%;
+        max-width:460px;
+        padding:40px;
+        border-radius:30px;
+        box-shadow:0 20px 50px rgba(0,0,0,.15);
+        animation:entrada .8s ease;
+    }
+
+    @keyframes entrada{
+        from{
+            opacity:0;
+            transform:translateY(25px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0);
+        }
+    }
+
+   .nav-pills{
+    background:#f5f5f5;
+    border-radius:40px;
+    padding:6px;
+    display:flex;
+}
+
+.nav-pills .nav-link{
+    width:100%;
+    border-radius:30px;
+    font-weight:700;
+    color:#777;
+    transition:.3s;
+    padding:14px 0;
+    text-align:center;
+    border:none;
+    background:transparent;
+}
+
+.nav-pills .nav-link.active{
+    background:linear-gradient(135deg,#ff6b00,#ff9800);
+    color:white;
+    box-shadow:0 5px 15px rgba(255,107,0,.3);
+}
+   
+
+    .form-label{
+        font-weight:600;
+        color:#444;
+    }
+
+    .form-control{
+        border:none;
+        border-radius:15px;
+        padding:14px;
+        background:#f4f5f7;
+        transition:.3s;
+    }
+
+    .form-control:focus{
+        background:white;
+        box-shadow:0 0 0 3px rgba(255,107,0,.2);
+    }
+
+    .btn-orange{
+        background:linear-gradient(135deg,#ff6b00,#ff9800);
+        color:white;
+        border:none;
+        border-radius:15px;
+        padding:14px;
+        font-size:1rem;
+        font-weight:700;
+        transition:.3s;
+    }
+
+    .btn-orange:hover{
+        color:white;
+        transform:translateY(-3px);
+        box-shadow:0 10px 20px rgba(255,107,0,.3);
+    }
+
+    .divider{
+        display:flex;
+        align-items:center;
+        text-align:center;
+        color:#999;
+        margin:25px 0;
+    }
+
+    .divider::before,
+    .divider::after{
+        content:'';
+        flex:1;
+        border-bottom:1px solid #ddd;
+    }
+
+    .divider::before{
+        margin-right:10px;
+    }
+
+    .divider::after{
+        margin-left:10px;
+    }
+
+    .btn-outline-dark{
+        border-radius:15px;
+        padding:12px;
+        transition:.3s;
+    }
+
+    .btn-outline-dark:hover{
+        transform:translateY(-2px);
+    }
+
+    .link-admin{
+        display:block;
+        text-align:center;
+        margin-top:25px;
+        color:#666;
+        text-decoration:none;
+        font-weight:500;
+    }
+
+    .link-admin:hover{
+        color:#ff6b00;
+    }
+
+.btn-outline-dark {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px; 
+    border-radius: 15px;
+    padding: 14px; 
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+.btn-outline-dark img {
+    width: 20px !important;
+    height: 20px !important;
+    display: inline-block !important;
+    object-fit: contain;
+    margin: 0 !important; 
+}
+.brand-subtitle {
+    color: white;
+    opacity: .95;
+    margin-bottom: 50px; /* Subimos el espacio aquí */
+    font-size: 1.1rem;
+}

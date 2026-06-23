@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 # Configuración de la aplicación y la ruta de las plantillas
 base_dir = os.path.abspath(os.path.dirname(__file__))
-app = Flask(__name__, template_folder='../templates')
+app = Flask(__name__, template_folder='../templates', static_folder='../static')
 # Encendemos la lectura del archivo .env oculto
 load_dotenv()
 
