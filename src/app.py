@@ -137,7 +137,7 @@ def index():
         return redirect(url_for('login_estudiante'))
     
     productos = Producto.query.filter_by(disponible=True).all()
-    return render_template('cliente/index.html', productos=productos, nombre_alumno=session.get('estudiante_nombre'))
+    return render_template('cliente/index.html', productos=productos)
 
 @app.route('/calcular', methods=['POST'])
 @requiere_estudiante
@@ -150,10 +150,14 @@ def calcular():
     productos = []
     nombres_para_ticket = []  # Extraemos los nombres para guardarlos en la BD
     
+    subtotal_calculado = 0.0
+    
     for item in items_seleccionados:
         nombre, precio = item.split(',')
+        precio_float = float(precio)
         productos.append({"nombre": nombre, "precio": float(precio)})
         nombres_para_ticket.append(nombre)
+        subtotal_calculado += precio_float
         
     # 1. Usar la función XP refactorizada (Lógica de Negocio)
     total = calcular_total(productos, tiene_cupon)
@@ -164,17 +168,17 @@ def calcular():
     
     db.session.add(nuevo_pedido)
     db.session.commit()  # Aquí se guarda físicamente en ingeniosnack.db
-    
+
     # Pasamos el número de ticket generado automáticamente a la vista de éxito
-    return render_template('cliente/exito.html', total=total, ticket=nuevo_pedido.ticket, nombre_alumno=session.get('estudiante_nombre'))
+    return render_template('cliente/exito.html', pedido = nuevo_pedido,total=total, ticket=nuevo_pedido.ticket, subtotal=subtotal_calculado)
 
 @app.route('/admin')
-@requiere_admin
 def admin():   
     # Consultar todos los pedidos de la base de datos (ordenados del más nuevo al más viejo)
     pedidos_reales = Pedido.query.order_by(Pedido.fecha.desc()).all()
     # Enviamos los datos reales a la plantilla del Sr. Julio
     return render_template('admin/panel.html', pedidos=pedidos_reales)
+    
 @app.route('/entregar/<int:id>', methods=['POST'])
 def entregar_pedido(id):
     pedido = Pedido.query.get_or_404(id)
