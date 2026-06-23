@@ -87,15 +87,22 @@ El prototipo de baja fidelidad muestra una plataforma sencilla donde el estudian
 
 ## Fase 5: TESTEAR (Validación con Usuario)
 [cite_start]Resultados de mostrar el prototipo a 2 estudiantes[cite: 43]:
-| Usuario      | ¿Qué le gustó?            | ¿Qué NO le gustó?     | ¿Qué dudas tuvo?       |
+| Usuario      | ¿Qué le gustó?            | ¿Qué NO le gustó?     | ¿Qué dudas tuvo?        |
 |              |                           |                       |  
-| Estudiante 1 |Le gustó que pueda separar | No le gustó que       | Preguntó si podría     |
-                su pedido antes del recreo | todavía no se vea     | cambiar su pedido si
-                y evitar hacer fila.       | claramente cómo se    | ese día ya no quiere lo
-                                           | realizaría el pago.   | que reservó.
+| Estudiante 1 |Le gustó que pueda separar | Me gustaría poder     | Note que arriba dice    |
+                de saltarme la fila en la  | mi bebida también.    | "Arma tu semana",pero
+                en la "ventanilla.El menu  | Con el frío que       | el boton dice "Mensual
+                desplegable para  elegir   | hace en la mañana,    | S/.15.00".¿Son 15
+                qué comer cada día es        necesito asegurar mi    soles a la semana o al 
+                súper fácil de usar y me     vaso de agua,y no       mes?Si es al mes,esta
+                ahorra tiempo.               solo de cafe            super barato.Si es a la 
+                                                                     semana ¿Que pasa si un dia falto a la facultad?
 
-| Estudiante 2 |Le gustó la opción “Arma   | No le gustó que pueda | Preguntó si habría     |
-                tu Semana” porque le       | olvidarse de recoger  | descuentos para
-                permite organizar sus      | su pedido si no hay   | estudiantes que
-                desayunos con anticipación.| recordatorio          | compren varios días
-                                           |                       | seguidos.
+
+| Estudiante 2 |Que los panes que muestren | Que solo veo la opcion| ¿El pago de los 15    |
+                (pollo,carne,hamburguesa)  | del"Lunes".Preferiria | soles se hace por 
+                son los clasicos que       | ver los 5 dias de la  | Yape em la misma 
+                siempre prepara el señor   | semana de golpe en una| aplicacion,o tengo que 
+                JUlio.Me da seguridad saber| sola pantalla para    | ir a pagarle al señor 
+                que la cantidad sera la      armar todo mi menu      Julio en efectivo el lunes
+                misma.                       rapdio el domingo       para activar mi                                                   suscripcion
