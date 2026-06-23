@@ -30,4 +30,5 @@ class Producto(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     precio = db.Column(db.Float, nullable=False)
     categoria = db.Column(db.String(50), nullable=False) # 'Sándwiches', 'Bebidas' o 'Snacks'
+    imagen = db.Column(db.String(300), nullable=True) # URL de la imagen del producto
     disponible = db.Column(db.Boolean, default=True) # Para que el Sr. Julio pueda "apagar" un producto si se acaba

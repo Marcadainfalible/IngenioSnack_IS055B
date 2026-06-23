@@ -106,20 +106,19 @@ with app.app_context():
     if Producto.query.count() == 0:
         productos_iniciales = [
             # Sándwiches
-            Producto(nombre="Hamburguesa de carne", precio=3.0, categoria="Sándwiches"),
-            Producto(nombre="Pan con pollo", precio=3.0, categoria="Sándwiches"),
+            Producto(nombre="Hamburguesa de carne", precio=3.0, categoria="Sándwiches", imagen="https://comidasperuanas.net/wp-content/uploads/2021/01/Hamburguesa-de-carne.webp"),
+            Producto(nombre="Pan con pollo", precio=3.0, categoria="Sándwiches", imagen= "https://www.sangucheriatrujillo.com/wp-content/uploads/2024/07/productos_004.jpg"),
             # Bebidas
-            Producto(nombre="Café", precio=1.5, categoria="Bebidas"),
-            Producto(nombre="Inka Cola", precio=2.0, categoria="Bebidas"),
-            Producto(nombre="Coca Cola", precio=2.5, categoria="Bebidas"),
-            Producto(nombre="Agua Cielo", precio=1.0, categoria="Bebidas"),
-            Producto(nombre="Agua San Mateo", precio=1.0, categoria="Bebidas"),
-            Producto(nombre="Agua Puquio", precio=1.0, categoria="Bebidas"),
+            Producto(nombre="Café", precio=1.5, categoria="Bebidas", imagen= "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/960px-A_small_cup_of_coffee.JPG"),
+            Producto(nombre="Inka Cola", precio=2.0, categoria="Bebidas", imagen= "https://www.donbelisario.com.pe/media/catalog/product/2/1/2146463134.png?optimize=medium&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700&format=jpeg"),
+            Producto(nombre="Coca Cola", precio=2.5, categoria="Bebidas", imagen= "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/15-09-26-RalfR-WLC-0098_-_Coca-Cola_glass_bottle_%28Germany%29.jpg/960px-15-09-26-RalfR-WLC-0098_-_Coca-Cola_glass_bottle_%28Germany%29.jpg"),
+            Producto(nombre="Agua Cielo", precio=1.0, categoria="Bebidas", imagen= "https://www.ajegroup.com/aje-assets/wp-content/uploads/2020/05/colombia-cielo.jpg"),
+            Producto(nombre="Agua San Mateo", precio=1.0, categoria="Bebidas", imagen= "https://corporacionliderperu.com/48430-large_default/san-mateo-agua-mineral-x-600-ml-sin-gas.jpg"),
             # Snacks
-            Producto(nombre="Papas Lays", precio=2.0, categoria="Snacks"),
-            Producto(nombre="Cuates", precio=1.0, categoria="Snacks"),
-            Producto(nombre="Chisitos", precio=1.0, categoria="Snacks"),
-            Producto(nombre="Inka Chips", precio=1.5, categoria="Snacks")
+            Producto(nombre="Papas Lays", precio=2.0, categoria="Snacks", imagen= "https://aceleralastatic.nyc3.cdn.digitaloceanspaces.com/files/uploads/1499/1596226959-77-frito-lay-papas-lays-clasicas-70-jpg.jpg"),
+            Producto(nombre="Cuates", precio=1.0, categoria="Snacks", imagen= "https://aceleralastatic.nyc3.cdn.digitaloceanspaces.com/files/uploads/1499/1710001544-83-cuatess-png.png"),
+            Producto(nombre="Chizitos", precio=1.0, categoria="Snacks", imagen= "https://fabricalaestrella.com/img/productos/snacks/chizitos.webp"),
+            Producto(nombre="Inka Chips", precio=1.5, categoria="Snacks", imagen= "https://esquinamarketshop.hadronica.pe/wp-content/uploads/1970/01/inka-chips-jalapeno.jpg")
         ]
         
         # Agregamos todos los productos de golpe y guardamos
@@ -167,7 +166,7 @@ def calcular():
     db.session.commit()  # Aquí se guarda físicamente en ingeniosnack.db
     
     # Pasamos el número de ticket generado automáticamente a la vista de éxito
-    return render_template('cliente/exito.html', total=total, ticket=nuevo_pedido.ticket)
+    return render_template('cliente/exito.html', total=total, ticket=nuevo_pedido.ticket, nombre_alumno=session.get('estudiante_nombre'))
 
 @app.route('/admin')
 @requiere_admin
