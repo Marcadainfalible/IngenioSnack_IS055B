@@ -86,23 +86,10 @@ El diseño inicial de nuestra solución ganadora se puede visualizar en el archi
 El prototipo de baja fidelidad muestra una plataforma sencilla donde el estudiante puede revisar los productos disponibles, elegir su snack o desayuno, armar su pedido semanal, confirmar su reserva y usar la opción de recojo express para evitar largas filas.
 
 ## Fase 5: TESTEAR (Validación con Usuario)
+
 Resultados de mostrar el prototipo a 2 estudiantes:
-| Usuario      | ¿Qué le gustó?            | ¿Qué NO le gustó?     | ¿Qué dudas tuvo?        |
-|              |                           |                       |  
-| Estudiante 1 |Le gustó que pueda separar | Me gustaría poder     | Note que arriba dice    |
-                de saltarme la fila en la  | mi bebida también.    | "Arma tu semana",pero
-                en la "ventanilla.El menu  | Con el frío que       | el boton dice "Mensual
-                desplegable para  elegir   | hace en la mañana,    | S/.15.00".¿Son 15
-                qué comer cada día es        necesito asegurar mi    soles a la semana o al 
-                súper fácil de usar y me     vaso de agua,y no       mes?Si es al mes,esta
-                ahorra tiempo.               solo de cafe            super barato.Si es a la 
-                                                                     semana ¿Que pasa si un dia falto a la facultad?
 
-
-| Estudiante 2 |Que los panes que muestren | Que solo veo la opcion| ¿El pago de los 15    |
-                (pollo,carne,hamburguesa)  | del"Lunes".Preferiria | soles se hace por 
-                son los clasicos que       | ver los 5 dias de la  | Yape em la misma 
-                siempre prepara el señor   | semana de golpe en una| aplicacion,o tengo que 
-                JUlio.Me da seguridad saber| sola pantalla para    | ir a pagarle al señor 
-                que la cantidad sera la      armar todo mi menu      Julio en efectivo el lunes
-                misma.                       rapdio el domingo       para activar mi                                                   suscripcion
+| Usuario | ¿Qué le gustó? | ¿Qué NO le gustó? | ¿Qué dudas tuvo? |
+| :--- | :--- | :--- | :--- |
+| **Estudiante 1** | Le gustó que pueda separar de saltarme la fila en la ventanilla. El menú desplegable para elegir qué comer cada día es súper fácil de usar y me ahorra tiempo. | Me gustaría poder elegir mi bebida también. Con el frío que hace en la mañana, necesito asegurar mi vaso de agua, y no solo de café. | Noté que arriba dice "Arma tu semana", pero el botón dice "Mensual S/.15.00". ¿Son 15 soles a la semana o al mes? Si es al mes, está súper barato. Si es a la semana ¿Qué pasa si un día falto a la facultad? |
+| **Estudiante 2** | Que los panes que muestren (pollo, carne, hamburguesa) son los clásicos que siempre prepara el señor Julio. Me da seguridad saber que la cantidad será la misma. | Que solo veo la opción del "Lunes". Preferiría ver los 5 días de la semana de golpe en una sola pantalla para armar todo mi menú rápido el domingo. | ¿El pago de los 15 soles se hace por Yape en la misma aplicación, o tengo que ir a pagarle al señor Julio en efectivo el lunes para activar mi suscripción? |
