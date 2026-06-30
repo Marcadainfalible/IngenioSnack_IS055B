@@ -44,7 +44,7 @@ Kevin: "La caja suena chévere, pero me quedo mil veces con la suscripción de r
 * **¿Qué DICE?** 
     "La cola es bravaza"
     "A veces bajo y ya se acabó la quinua"
-    "El jueves ya estoy aguja (sin plata)"
+    "El jueves ya estoy aguja"
 * **¿Qué PIENSA?** 
     Piensa que la fila le quita tiempo importante y prefiere no comprar antes que llegar tarde a clases.
     Piensa que una plataforma digital ayudaría a evitar las filas largas.
@@ -59,10 +59,10 @@ Kevin: "La caja suena chévere, pero me quedo mil veces con la suscripción de r
     Siente interés por una solución que le permita comprar de forma más rápida y sencilla.
 ## Fase 2: DEFINIR (El Problema Central)
 **Point of View (POV):**
-[cite_start]"El estudiante de la FIS necesita asegurar su snack o desayuno sin hacer largas filas, porque tiene poco tiempo entre clases y la espera le genera estrés, pérdida de tiempo y riesgo de llegar tarde." [cite: 34, 35]
+"El estudiante de la FIS necesita asegurar su snack o desayuno sin hacer largas filas, porque tiene poco tiempo entre clases y la espera le genera estrés, pérdida de tiempo y riesgo de llegar tarde." [cite: 34, 35]
 
 ## Fase 3: IDEAR (Lluvia de Soluciones)
-[cite_start]Aplicamos la técnica Crazy 8s / SCAMPER y surgieron estas ideas[cite: 37]:
+Aplicamos la técnica Crazy 8s / SCAMPER y surgieron estas ideas[cite: 37]:
 1. Suscripción "Línea VIP": El estudiante paga una mensualidad y tiene derecho a saltarse la fila normal todos los días para recoger su pedido.
 2. Suscripción "Arma tu Semana": El estudiante entra a la web el domingo, elige qué sándwich y bebida quiere para cada día de la semana, y el Sr. Julio ya sabe exactamente qué cocinar para él sin desperdiciar insumos.
 3. Delivery al Aula (Plan Premium): El estudiante paga un extra en la suscripción para que un ayudante del Sr. Julio lleve el desayuno directo a su carpeta antes de que empiece la clase.
@@ -72,16 +72,16 @@ Kevin: "La caja suena chévere, pero me quedo mil veces con la suscripción de r
 7. Suscripción Grupal (Plan Mancha): Si 5 amigos de un equipo de proyecto se suscriben juntos, el Sr. Julio les arma un combo gigante todos los viernes con descuento.
 8. Máquina Expendedora Exclusiva: El Sr. Julio coloca una máquina que solo se abre si el estudiante pasa su carnet universitario con la suscripción activa.
 9. Botón de Pánico "Tengo Hambre": Una función en la app exclusiva para suscriptores. El estudiante la presiona cuando faltan 5 minutos para el recreo y el Sr. Julio prepara un sándwich aleatorio al instante.
-10. Gamificada (Racha de Asistencia): Si el estudiante recoge su suscripción de lunes a jueves sin fallar, el viernes recibe un postre gratis. [cite: 38]
+10. Gamificada (Racha de Asistencia): Si el estudiante recoge su suscripción de lunes a jueves sin fallar, el viernes recibe un postre gratis. 
 
 **Las 2 mejores ideas seleccionadas por votación:**
 1. Idea ganadora 1: Suscripción "Arma tu Semana" (Pre-reserva dominical).
 Esta idea fue seleccionada porque permite que los estudiantes organicen sus pedidos con anticipación. Además, ayuda al Sr. Julio a comprar exactamente la cantidad necesaria de insumos, como pan, pollo, bebidas y otros productos, evitando pérdidas económicas por preparar comida que nadie compra.
 2. Idea ganadora 2: Suscripción "Línea VIP" (Recojo Express).
-Esta idea fue seleccionada porque resuelve directamente el problema principal del estudiante: perder tiempo haciendo fila. También es una solución simple, rápida y económica de implementar como MVP, ya que el estudiante puede hacer su pedido previamente y solo pasar a recogerlo. [cite: 38]
+Esta idea fue seleccionada porque resuelve directamente el problema principal del estudiante: perder tiempo haciendo fila. También es una solución simple, rápida y económica de implementar como MVP, ya que el estudiante puede hacer su pedido previamente y solo pasar a recogerlo. 
 
 ## Fase 4: PROTOTIPAR (Baja Fidelidad)
-El diseño inicial de nuestra solución ganadora se puede visualizar en el archivo adjunto PROTOTIPO.png. [cite: 39, 41, 103]
+El diseño inicial de nuestra solución ganadora se puede visualizar en el archivo adjunto PROTOTIPO.png.
 
 El prototipo de baja fidelidad muestra una plataforma sencilla donde el estudiante puede revisar los productos disponibles, elegir su snack o desayuno, armar su pedido semanal, confirmar su reserva y usar la opción de recojo express para evitar largas filas.
 
