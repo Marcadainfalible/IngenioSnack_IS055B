@@ -1,7 +1,7 @@
 Design_thinking
 # Proceso de Design Thinking - IngenioSnack
 ## Fase 1: EMPATIZAR (Investigación de Usuario)
-[cite_start]Se realizaron 3 entrevistas cortas a estudiantes de la FIS[cite: 30, 31].
+Se realizaron 3 entrevistas cortas a estudiantes de la FIS.
 **Entrevista 1**
 El estudiante que siempre va contra el reloj
 Perfil: Mateo, 20 años, 5to ciclo de Ingeniería de Sistemas.
@@ -72,21 +72,21 @@ Kevin: "La caja suena chévere, pero me quedo mil veces con la suscripción de r
 7. Suscripción Grupal (Plan Mancha): Si 5 amigos de un equipo de proyecto se suscriben juntos, el Sr. Julio les arma un combo gigante todos los viernes con descuento.
 8. Máquina Expendedora Exclusiva: El Sr. Julio coloca una máquina que solo se abre si el estudiante pasa su carnet universitario con la suscripción activa.
 9. Botón de Pánico "Tengo Hambre": Una función en la app exclusiva para suscriptores. El estudiante la presiona cuando faltan 5 minutos para el recreo y el Sr. Julio prepara un sándwich aleatorio al instante.
-10. [cite_start]Suscripción Gamificada (Racha de Asistencia): Si el estudiante recoge su suscripción de lunes a jueves sin fallar, el viernes recibe un postre gratis. [cite: 38]
+10. Gamificada (Racha de Asistencia): Si el estudiante recoge su suscripción de lunes a jueves sin fallar, el viernes recibe un postre gratis. [cite: 38]
 
 **Las 2 mejores ideas seleccionadas por votación:**
 1. Idea ganadora 1: Suscripción "Arma tu Semana" (Pre-reserva dominical).
 Esta idea fue seleccionada porque permite que los estudiantes organicen sus pedidos con anticipación. Además, ayuda al Sr. Julio a comprar exactamente la cantidad necesaria de insumos, como pan, pollo, bebidas y otros productos, evitando pérdidas económicas por preparar comida que nadie compra.
-2. [cite_start]Idea ganadora 2: Suscripción "Línea VIP" (Recojo Express).
+2. Idea ganadora 2: Suscripción "Línea VIP" (Recojo Express).
 Esta idea fue seleccionada porque resuelve directamente el problema principal del estudiante: perder tiempo haciendo fila. También es una solución simple, rápida y económica de implementar como MVP, ya que el estudiante puede hacer su pedido previamente y solo pasar a recogerlo. [cite: 38]
 
 ## Fase 4: PROTOTIPAR (Baja Fidelidad)
-[cite_start]El diseño inicial de nuestra solución ganadora se puede visualizar en el archivo adjunto PROTOTIPO.png. [cite: 39, 41, 103]
+El diseño inicial de nuestra solución ganadora se puede visualizar en el archivo adjunto PROTOTIPO.png. [cite: 39, 41, 103]
 
 El prototipo de baja fidelidad muestra una plataforma sencilla donde el estudiante puede revisar los productos disponibles, elegir su snack o desayuno, armar su pedido semanal, confirmar su reserva y usar la opción de recojo express para evitar largas filas.
 
 ## Fase 5: TESTEAR (Validación con Usuario)
-[cite_start]Resultados de mostrar el prototipo a 2 estudiantes[cite: 43]:
+Resultados de mostrar el prototipo a 2 estudiantes:
 | Usuario      | ¿Qué le gustó?            | ¿Qué NO le gustó?     | ¿Qué dudas tuvo?        |
 |              |                           |                       |  
 | Estudiante 1 |Le gustó que pueda separar | Me gustaría poder     | Note que arriba dice    |

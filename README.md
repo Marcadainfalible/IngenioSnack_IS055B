@@ -62,3 +62,6 @@ IngenioSnack_IS055B/
 ├── tests/                        # Pruebas unitarias (TDD)
 ├── .env.example                  # Variables de entorno
 └── README.md                     # Evolución y documentación del proyecto
+
+
+
